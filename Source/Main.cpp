@@ -59,7 +59,7 @@ int main()
 
 	previous_time = std::chrono::steady_clock::now();
 
-	while (1 == window.isOpen())
+	while (window.isOpen())
 	{
 		//Someone said I should use chrono more often, and I did.
 		std::chrono::microseconds delta_time = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - previous_time);
@@ -72,7 +72,7 @@ int main()
 		{
 			lag -= FRAME_DURATION;
 
-			while (1 == window.pollEvent(event))
+			while (window.pollEvent(event))
 			{
 				switch (event.type)
 				{
@@ -118,7 +118,7 @@ int main()
 
 				for (Bird& bird : birds)
 				{
-					if (0 == bird.get_dead())
+					if (!bird.get_dead())
 					{
 						restart = 0;
 
@@ -126,7 +126,7 @@ int main()
 					}
 				}
 
-				if (0 == restart)
+				if (!restart)
 				{
 					pipes_manager.update(random_engine);
 
